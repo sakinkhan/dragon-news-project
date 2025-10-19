@@ -19,13 +19,13 @@ const HomeLayout = () => {
         </nav>
       </header>
       <main className="w-11/12 mx-auto my-4 grid grid-cols-12 mt-15 gap-5">
-        <aside className="col-span-3">
+        <aside className="col-span-3 sticky top-5 h-fit">
           <LeftAside></LeftAside>
         </aside>
         <section className="middle col-span-6">
           <Outlet></Outlet>
         </section>
-        <aside className="col-span-3">
+        <aside className="col-span-3 sticky top-5 h-fit">
           <RightAside></RightAside>
         </aside>
         <section className="right"></section>
