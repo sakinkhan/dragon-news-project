@@ -1,13 +1,33 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { use } from "react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
+  const { createUser, setUser, updateUser } = use(AuthContext);
+
+  const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        updateUser({ displayName: name, photoURL: photo })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photo });
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        setUser(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="flex justify-center items-center">
@@ -56,7 +76,7 @@ const Register = () => {
               />
               <div>
                 <label className="label">
-                  <input type="checkbox" className="checkbox" />
+                  <input type="checkbox" className="checkbox" required />
                   Accept{" "}
                   <span className="font-semibold">Term & Conditions</span>
                 </label>

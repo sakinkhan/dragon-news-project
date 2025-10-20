@@ -2,10 +2,19 @@ import React from "react";
 import { FaStar, FaEye, FaShareAlt } from "react-icons/fa";
 import { format } from "date-fns";
 import { CiBookmark } from "react-icons/ci";
+import { Link } from "react-router";
 
 const NewsCard = ({ news }) => {
-  const { title, rating, total_view, author, thumbnail_url, details, tags } =
-    news;
+  const {
+    id,
+    title,
+    rating,
+    total_view,
+    author,
+    thumbnail_url,
+    details,
+    tags,
+  } = news;
 
   const formattedDate = format(new Date(author.published_date), "yyyy-MM-dd");
 
@@ -53,9 +62,12 @@ const NewsCard = ({ news }) => {
         <p>
           {details.length > 200 ? details.slice(0, 200) + "... " : details}
           {details.length > 200 && (
-            <span className="text-[#FF8C47] font-semibold cursor-pointer hover:underline">
+            <Link
+              to={`/newsDetails/${id}`}
+              className="text-[#FF8C47] font-semibold cursor-pointer hover:underline"
+            >
               Read More
-            </span>
+            </Link>
           )}
         </p>
         <div className="text-xs text-gray-400 mt-2">
