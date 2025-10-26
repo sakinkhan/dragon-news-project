@@ -12,10 +12,8 @@ const Login = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
     logIn(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
